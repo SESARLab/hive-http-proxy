@@ -26,7 +26,7 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.25.3",
     "jest": "27.4.7",
-    "node-fetch": "^3.1.0",
-    "test-listen": "^1.1.0"
+    "node-fetch": "2.6.6",
+    "test-listen": "1.1.0"
   }
 }
