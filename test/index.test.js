@@ -1,10 +1,57 @@
 const http = require('http');
 const listen = require('test-listen');
 const fetch = require('node-fetch');
+const config = require('../config');
+const hive = require('../hive');
 const handler = require('../index');
 
+jest.mock('../hive');
+
 describe('my endpoint', () => {
-  it('should return 405  Method Not Allowed if request method is different from POST', async () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should handle Hive DDL statement via  HTTP POST', async () => {
+    const connection = {
+      close: jest.fn(),
+    };
+
+    const result = [{
+      data: 1,
+    }];
+
+    hive.connect.mockResolvedValue(connection);
+    hive.execute.mockResolvedValue(result);
+
+    const server = new http.Server(handler);
+
+    const statement = 'SELECT * from table';
+    const body = JSON.stringify({
+      statement,
+    });
+
+    const url = await listen(server);
+    const response = await fetch(url, {
+      method: 'POST',
+      body,
+    });
+
+    const data = await response.json();
+
+    expect(hive.connect).toHaveBeenCalledWith({
+      host: config.HIVE_HOST,
+      port: config.HIVE_PORT,
+      username: config.HIVE_USER,
+      password: config.HIVE_PASSWORD,
+    });
+
+    expect(hive.execute).toHaveBeenCalledWith(connection, statement);
+    expect(connection.close).toHaveBeenCalled();
+    expect(data).toEqual(result);
+  });
+
+  it('should return 405 Method Not Allowed if request method is different from POST', async () => {
     const server = new http.Server(handler);
 
     const url = await listen(server);

@@ -1,4 +1,6 @@
 const { json, send } = require('micro');
+const config = require('./config');
+const hive = require('./hive');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -17,9 +19,14 @@ module.exports = async (req, res) => {
     });
   }
 
-  // const connection = await connect();
-  // const data = await execute(statement);
-  // connection.close()
+  const connection = await hive.connect({
+    host: config.HIVE_HOST,
+    port: config.HIVE_PORT,
+    username: config.HIVE_USER,
+    password: config.HIVE_PASSWORD,
+  });
+  const data = await hive.execute(connection, statement);
+  connection.close();
 
-  return send(res, 200, {});
+  return send(res, 200, data);
 };
