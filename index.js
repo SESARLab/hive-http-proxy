@@ -7,8 +7,19 @@ module.exports = async (req, res) => {
     });
   }
 
-  const data = await json(req);
-  console.log(data);
+  const { statement } = await json(req);
 
-  return send(res, 200, data);
+  if (!statement) {
+    return send(res, 400, {
+      message: `Invalid statement. Statement payload must have this form: {
+        "statement": "SELECT 1"
+      }`,
+    });
+  }
+
+  // const connection = await connect();
+  // const data = await execute(statement);
+  // connection.close()
+
+  return send(res, 200, {});
 };

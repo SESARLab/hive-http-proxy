@@ -14,4 +14,21 @@ describe('my endpoint', () => {
 
     server.close();
   });
+
+  it('should return 400 Bad Request for a payload without a statement', async () => {
+    const server = new http.Server(handler);
+    const body = JSON.stringify({
+      foo: 'bar',
+    });
+
+    const url = await listen(server);
+    const response = await fetch(url, {
+      method: 'POST',
+      body,
+    });
+
+    expect(response.status).toBe(400);
+
+    server.close();
+  });
 });
