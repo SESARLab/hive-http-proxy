@@ -19,6 +19,7 @@
   "author": "Gabriele D'Arrigo, <gabriele.darrigo@studenti.unimi.it>",
   "license": "UNLICENSED",
   "dependencies": {
+    "hive-driver": "0.1.7",
     "micro": "9.3.4"
   },
   "devDependencies": {
