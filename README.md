@@ -1,16 +1,16 @@
 # Hive HTTP Proxy
 
-A thin HTTP proxy that exposes a single POST endpoint to run Hive SQL DDL/DML.
-The application was primarily designed to run JMeter load testing.
+A thin HTTP proxy that exposes a single POST endpoint to run Hive SQL DDL/DML.  
+The application was primarily designed to run JMeter load testing.  
 
 ## Abstract
 
-Sadly, [Apache Hive](https://hive.apache.org/) doesn't expose a set of REST API to interact with, similarly to other more recent platforms (like [Apache Druid](https://druid.apache.org/docs/latest/querying/sql.html#http-post), or [Presto](https://prestodb.io/docs/current/develop/client-protocol.html)).
-This means that a client is forced to use Hive JDBC drivers or Hive Thrift drivers to perform TCP connections.
-At the time of this writing, the only available REST API for Hive is [WebHCat](https://cwiki.apache.org/confluence/display/Hive/WebHCat), a layer on top of HCatalog, which is a table and storage management layer for Hadoop.
-While WebHCat is installed with Hive, starting with Hive release 0.11.0, its capability is quite limited;
-a client can run a Hive query or set of commands via the `http://hostname/templeton/v1/hive` endpoint, but the response contains only the ID of a job that runs on background on Hadoop, and an optional callback property, that define a URL to be called upon job completion.
-This makes it very hard to test Apache Hive with JMeter unless to configure the latter to connect to Hive via JDBC (a not so viable option due to the [configuration](https://community.cloudera.com/t5/Community-Articles/JMeter-Setup-for-Hive-Load-Testing/ta-p/247745) [difficulty](http://benn-cs.github.io/impala/2013/04/27/using-apache-jmeter-to-test-hive-through-jdbc/)).
+Sadly, [Apache Hive](https://hive.apache.org/) doesn't expose a set of REST API to interact with, similarly to other more recent platforms (like [Apache Druid](https://druid.apache.org/docs/latest/querying/sql.html#http-post), or [Presto](https://prestodb.io/docs/current/develop/client-protocol.html)).  
+This means that a client is forced to use Hive JDBC drivers or Hive Thrift drivers to perform TCP connections.  
+At the time of this writing, the only available REST API for Hive is [WebHCat](https://cwiki.apache.org/confluence/display/Hive/WebHCat), a layer on top of HCatalog, which is a table and storage management layer for Hadoop.  
+While WebHCat is installed with Hive, starting with Hive release 0.11.0, its capability is quite limited;  
+a client can run a Hive query or set of commands via the `http://hostname/templeton/v1/hive` endpoint, but the response contains only the ID of a job that runs on background on Hadoop, and an optional callback property, that define a URL to be called upon job completion.  
+This makes it very hard to test Apache Hive with JMeter unless to configure the latter to connect to Hive via JDBC (a not so viable option due to the [configuration](https://community.cloudera.com/t5/Community-Articles/JMeter-Setup-for-Hive-Load-Testing/ta-p/247745) [difficulty](http://benn-cs.github.io/impala/2013/04/27/using-apache-jmeter-to-test-hive-through-jdbc/)).  
 To solve this problem I decided to write a simple HTTP layer on top of [Javascript Hive driver](https://www.npmjs.com/package/hive-driver) to run Hive SQL statements via HTTP.
 
 ## Usage
@@ -40,8 +40,8 @@ Please note that Hive HTTP Proxy doesn't do any assumption on the statement cont
 
 ## Run in a Docker container
 
-Hive HTTP Proxy can run as a dockerized application and include its Dockerfile definition.
-
+Hive HTTP Proxy can run as a dockerized application and include its Dockerfile definition.  
+  
 To build the Docker image run this command:
 
 ```bash
