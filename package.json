@@ -4,7 +4,7 @@
   "description": "A slim HTTP proxy that exposes a single POST endpoint to run SQL Hive DDL/DML",
   "main": "index.js",
   "scripts": {
-    "start": "micro",
+    "start": "micro -l tcp://0.0.0.0:10001",
     "test": "jest"
   },
   "repository": {
