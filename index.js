@@ -13,20 +13,26 @@ module.exports = async (req, res) => {
 
   if (!statement) {
     return send(res, 400, {
-      message: `Invalid statement. Statement payload must have this form: {
-        "statement": "SELECT 1"
-      }`,
+      message: 'Invalid statement. Statement payload must have this form: { "statement": "SELECT * FROM table" }',
     });
   }
 
-  const connection = await hive.connect({
-    host: config.HIVE_HOST,
-    port: config.HIVE_PORT,
-    username: config.HIVE_USER,
-    password: config.HIVE_PASSWORD,
-  });
-  const data = await hive.execute(connection, statement);
-  connection.close();
+  try {
+    const connection = await hive.connect({
+      host: config.HIVE_HOST,
+      port: config.HIVE_PORT,
+      username: config.HIVE_USERNAME,
+      password: config.HIVE_PASSWORD,
+    });
+    const data = await hive.execute(connection, statement);
+    connection.close();
 
-  return send(res, 200, data);
+    return send(res, 200, data);
+  } catch (err) {
+    console.error(err);
+
+    return send(res, 500, {
+      message: err.message,
+    });
+  }
 };

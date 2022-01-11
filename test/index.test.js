@@ -42,13 +42,15 @@ describe('my endpoint', () => {
     expect(hive.connect).toHaveBeenCalledWith({
       host: config.HIVE_HOST,
       port: config.HIVE_PORT,
-      username: config.HIVE_USER,
+      username: config.HIVE_USERNAME,
       password: config.HIVE_PASSWORD,
     });
 
     expect(hive.execute).toHaveBeenCalledWith(connection, statement);
     expect(connection.close).toHaveBeenCalled();
     expect(data).toEqual(result);
+
+    server.close();
   });
 
   it('should return 405 Method Not Allowed if request method is different from POST', async () => {
