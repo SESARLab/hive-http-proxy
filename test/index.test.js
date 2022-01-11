@@ -12,7 +12,7 @@ describe('my endpoint', () => {
     jest.resetAllMocks();
   });
 
-  it('should handle Hive DDL statement via  HTTP POST', async () => {
+  it('should handle Hive DDL statement via HTTP POST', async () => {
     const connection = {
       close: jest.fn(),
     };
@@ -49,6 +49,32 @@ describe('my endpoint', () => {
     expect(hive.execute).toHaveBeenCalledWith(connection, statement);
     expect(connection.close).toHaveBeenCalled();
     expect(data).toEqual(result);
+
+    server.close();
+  });
+
+  it('should return 500 for any Hive error', async () => {
+    const error = new Error('Network error');
+    hive.connect.mockRejectedValue(error);
+
+    const server = new http.Server(handler);
+
+    const statement = 'SELECT * from table';
+    const body = JSON.stringify({
+      statement,
+    });
+
+    const url = await listen(server);
+    const response = await fetch(url, {
+      method: 'POST',
+      body,
+    });
+    const data = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(data).toEqual({
+      message: error.message,
+    });
 
     server.close();
   });

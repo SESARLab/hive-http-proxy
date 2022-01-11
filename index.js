@@ -2,6 +2,8 @@ const { json, send } = require('micro');
 const config = require('./config');
 const hive = require('./hive');
 
+const { error } = console;
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return send(res, 405, {
@@ -29,7 +31,7 @@ module.exports = async (req, res) => {
 
     return send(res, 200, data);
   } catch (err) {
-    console.error(err);
+    error(err);
 
     return send(res, 500, {
       message: err.message,
