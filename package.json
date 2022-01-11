@@ -1,7 +1,7 @@
 {
   "name": "hive-http-proxy",
   "version": "0.1.0",
-  "description": "A slim HTTP proxy that exposes a single /statement POST endpoint to run SQL Hive DDL/DML",
+  "description": "A slim HTTP proxy that exposes a single POST endpoint to run SQL Hive DDL/DML",
   "main": "index.js",
   "scripts": {
     "start": "micro",
@@ -12,9 +12,8 @@
     "url": "git@repository.v2.moon-cloud.eu:gabrieledarrigo/hive-http-proxy.git"
   },
   "keywords": [
-    "\"Apache",
-    "Hive\"",
-    "Proxy"
+    "Apache Hive",
+    "HTTP Proxy"
   ],
   "author": "Gabriele D'Arrigo, <gabriele.darrigo@studenti.unimi.it>",
   "license": "UNLICENSED",
