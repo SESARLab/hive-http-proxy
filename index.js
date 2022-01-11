@@ -1,6 +1,6 @@
 const { json, send } = require('micro');
 const config = require('./config');
-const hive = require('./hive');
+const hive = require('./lib/hive');
 
 const { error } = console;
 

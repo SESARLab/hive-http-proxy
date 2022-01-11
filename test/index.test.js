@@ -2,10 +2,10 @@ const http = require('http');
 const listen = require('test-listen');
 const fetch = require('node-fetch');
 const config = require('../config');
-const hive = require('../hive');
+const hive = require('../lib/hive');
 const handler = require('../index');
 
-jest.mock('../hive');
+jest.mock('../lib/hive');
 
 describe('my endpoint', () => {
   afterEach(() => {

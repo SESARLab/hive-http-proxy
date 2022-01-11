@@ -1,5 +1,5 @@
 const hive = require('hive-driver');
-const { connect, execute } = require('../hive');
+const { connect, execute } = require('../../lib/hive');
 
 jest.mock('hive-driver', () => ({
   ...jest.requireActual('hive-driver'),
