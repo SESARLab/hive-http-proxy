@@ -1,7 +1,7 @@
 {
   "name": "hive-http-proxy",
   "version": "0.1.0",
-  "description": "Hive HTTP Proxy exposes a single POST endpoint to run Hive SQL DDL/DML.",
+  "description": "Hive HTTP Proxy exposes a single POST endpoint to run Hive SQL DDL/DML statements",
   "main": "index.js",
   "scripts": {
     "start": "micro -l tcp://0.0.0.0:10001",

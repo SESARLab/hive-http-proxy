@@ -1,6 +1,6 @@
 # Hive HTTP Proxy
 
-Hive HTTP Proxy exposes a single POST endpoint to run Hive SQL DDL/DML.  
+Hive HTTP Proxy exposes a single POST endpoint to run Hive SQL DDL/DML statements.    
 This application was primarily designed to run JMeter HTTP load testing against Apache Hive, in order to compare the results with Apache Druid, in the context of my experimental thesis on[ MIND Foods HUB](https://www.mindfoodshub.com/) Data Lake.  
 
 ## Abstract
